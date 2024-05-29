@@ -1,0 +1,9 @@
+-- Create 'tablets' table
+CREATE TABLE IF NOT EXISTS tablets (
+    id CHAR(36) NOT NULL,
+    PRIMARY KEY (id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE UNIQUE INDEX index_tablet ON tablets (id);

@@ -1,0 +1,28 @@
+app:
+  name: "RestaurantApp"
+  db:
+    name: restaurant
+    host: localhost
+    port: 3307
+    username: "restaurant_user"
+    password: "restaurant_password"
+spring:
+  application:
+    name: "visie.excersise.spring.restaurant"
+  profiles:
+    active: 'dev'
+  datasource:
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    username: "${app.db.username}"
+    password: "${app.db.password}"
+    url: "jdbc:mysql://${app.db.host}:${app.db.port}/${app.db.name}?useSsl=false&allowPublicKeyRetrieval=true"
+  flyway:
+    enabled: true
+    user: "flyway_user"
+    password: "flyway_password"
+    url: "${spring.datasource.url}"
+    locations: "classpath:db/migration"
+    validateMigrationNaming: true
+logging.level:
+  org.springframework.web: DEBUG
+  org.hibernate: ERROR

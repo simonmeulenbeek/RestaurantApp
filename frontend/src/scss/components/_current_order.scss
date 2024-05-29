@@ -1,0 +1,103 @@
+.current_order_component {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	
+
+	@media (min-width: 1024px) {
+		padding: 0px;
+		width: 100%;
+		position: sticky;
+		bottom: unset;
+		left: unset;
+    }
+}
+
+.current_order {
+	background-color: white;
+    box-shadow: 1px 1px 8px 0px rgba($color-3, 0.4);
+
+	
+	h3 {
+		border-bottom: 1px solid #b3b3b3;
+		margin: 20px 20px;
+	}
+
+
+	&__content {
+		padding: 0 28px;
+		color: #4d4d4d;
+	}
+
+	&__table_headers {
+		display: flex;
+		flex-direction: row;
+		border-bottom: 1px solid #b3b3b3;
+		column-gap: 8px;
+	}
+
+	&__table_header {
+		flex-basis: 20%;
+		font-weight: bold;
+
+		&__dish { 
+			text-align: start;
+			flex-basis: 40%;
+		}
+		&__price { text-align: end;}
+		&__amount { text-align: end;}
+		&__total { text-align: end;}
+	}
+
+	
+	@media (min-width: 1024px) {
+		padding: 4px;
+		width: 280px;
+		position: static;
+		bottom: unset;
+		left: unset;
+    }
+}
+
+.current_order:before, .current_order:after {
+	content:'';
+	display: block;
+	position: relative;
+	background-image: linear-gradient(135deg, transparent 66%, white 67%),
+					  linear-gradient(45deg, white 33%, rgba(128, 128, 128, 0.39) 34%, transparent 44%);
+	background-position: -5px 0;
+	background-size: 10px 100%;
+	background-repeat:repeat-x;
+}
+
+.current_order:before {
+	width:103%;
+	height: 15px;
+	left: -4px;
+	top: -14px;
+}
+
+.current_order:after {
+	width:103%;
+	height: 15px;
+	left: -4px;
+	bottom: -16px;
+	background-image: linear-gradient(315deg, transparent 66%, white 67%),
+					  linear-gradient(225deg, white 33%, rgba(128, 128, 128, 0.39) 34%, transparent 44%);
+}
+
+.order-item {
+	display: flex;
+	flex-direction: row;
+	
+	&__value {
+		flex-basis: 20%;
+		text-align: end;
+	}
+
+	&__name {
+		flex-basis: 40%;
+		text-align: start;
+	}
+}

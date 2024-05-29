@@ -1,0 +1,14 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form__item {
+    &--single-line {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 16px;
+    }
+}

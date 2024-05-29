@@ -1,0 +1,15 @@
+// Style Colors
+
+$color-1: #FFFCF2;
+$color-2: #CCC5B9;
+$color-3: #403D39;
+$color-4: #252422;
+$color-5: #EB5E28;
+
+.content-box {
+    padding: 0px 24px 0px 24px;
+    background-color: $color-1;
+    border: 1px solid rgba($color-3, 0.4);
+    border-radius: 16px;
+    box-shadow: 1px 1px 8px 0px rgba($color-3, 0.4);
+}

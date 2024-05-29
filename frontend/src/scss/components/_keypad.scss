@@ -1,0 +1,64 @@
+.keypad {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__button {
+        height: 64px;
+        width: 64px;
+        font-weight: bolder;
+    }
+
+    &__top {
+        height: 64px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 16px
+    }
+
+    &__input_display {
+        height: 100%;
+        border: 1px solid black;
+        font-size: 350%;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+
+    &__backspace {
+        width: 64px;
+        height: 64px;
+    }
+
+    &__inputs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 16px;
+
+        .keypad__input_zero {
+            grid-column-start: 2;
+        }
+
+        .keypad__cancel, .keypad__confirm {
+            grid-row-start: 5;
+        }
+
+        .keypad__cancel {
+            border-radius: 10px;
+            background-color: darken(red, 10%);
+            color: white;
+            border: 0;
+        }
+        .keypad__confirm {
+            width: 100%;
+            grid-column: 2 / 4;
+            background-color: green;
+            color: white;
+            border-radius: 10px;
+            border: 0;
+        }
+    }
+}

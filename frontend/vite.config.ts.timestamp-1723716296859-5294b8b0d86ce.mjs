@@ -1,0 +1,32 @@
+// vite.config.ts
+import { fileURLToPath, URL } from "node:url";
+import { defineConfig } from "file:///O:/Deelnemers/Simon%20Meulenbeek/opdrachten/java/spring-restaurant-order-app/frontend/node_modules/vite/dist/node/index.js";
+import vue from "file:///O:/Deelnemers/Simon%20Meulenbeek/opdrachten/java/spring-restaurant-order-app/frontend/node_modules/@vitejs/plugin-vue/dist/index.mjs";
+import vueDevTools from "file:///O:/Deelnemers/Simon%20Meulenbeek/opdrachten/java/spring-restaurant-order-app/frontend/node_modules/vite-plugin-vue-devtools/dist/vite.mjs";
+var __vite_injected_original_import_meta_url = "file:///O:/Deelnemers/Simon%20Meulenbeek/opdrachten/java/spring-restaurant-order-app/frontend/vite.config.ts";
+var vite_config_default = defineConfig({
+  plugins: [
+    vue(),
+    vueDevTools()
+  ],
+  server: {
+    open: "",
+    watch: {
+      usePolling: true
+    }
+  },
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", __vite_injected_original_import_meta_url)),
+      "icons": fileURLToPath(new URL("./node_modules/vue-material-design-icons", __vite_injected_original_import_meta_url))
+    },
+    extensions: [
+      ".vue",
+      ".ts"
+    ]
+  }
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcudHMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJPOlxcXFxEZWVsbmVtZXJzXFxcXFNpbW9uIE1ldWxlbmJlZWtcXFxcb3BkcmFjaHRlblxcXFxqYXZhXFxcXHNwcmluZy1yZXN0YXVyYW50LW9yZGVyLWFwcFxcXFxmcm9udGVuZFwiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiTzpcXFxcRGVlbG5lbWVyc1xcXFxTaW1vbiBNZXVsZW5iZWVrXFxcXG9wZHJhY2h0ZW5cXFxcamF2YVxcXFxzcHJpbmctcmVzdGF1cmFudC1vcmRlci1hcHBcXFxcZnJvbnRlbmRcXFxcdml0ZS5jb25maWcudHNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL086L0RlZWxuZW1lcnMvU2ltb24lMjBNZXVsZW5iZWVrL29wZHJhY2h0ZW4vamF2YS9zcHJpbmctcmVzdGF1cmFudC1vcmRlci1hcHAvZnJvbnRlbmQvdml0ZS5jb25maWcudHNcIjtpbXBvcnQgeyBmaWxlVVJMVG9QYXRoLCBVUkwgfSBmcm9tICdub2RlOnVybCdcblxuaW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSAndml0ZSdcbmltcG9ydCB2dWUgZnJvbSAnQHZpdGVqcy9wbHVnaW4tdnVlJ1xuaW1wb3J0IHZ1ZURldlRvb2xzIGZyb20gJ3ZpdGUtcGx1Z2luLXZ1ZS1kZXZ0b29scydcblxuLy8gaHR0cHM6Ly92aXRlanMuZGV2L2NvbmZpZy9cbmV4cG9ydCBkZWZhdWx0IGRlZmluZUNvbmZpZyh7XG4gICAgcGx1Z2luczogW1xuICAgICAgICB2dWUoKSxcbiAgICAgICAgdnVlRGV2VG9vbHMoKVxuICAgIF0sXG4gICAgc2VydmVyOiB7XG4gICAgICAgIG9wZW46ICcnLFxuICAgICAgICB3YXRjaDoge1xuICAgICAgICAgICAgdXNlUG9sbGluZzogdHJ1ZVxuICAgICAgICB9XG4gICAgfSxcbiAgICByZXNvbHZlOiB7XG4gICAgICAgIGFsaWFzOiB7XG4gICAgICAgICAgICAnQCc6IGZpbGVVUkxUb1BhdGgobmV3IFVSTCgnLi9zcmMnLCBpbXBvcnQubWV0YS51cmwpKSxcbiAgICAgICAgICAgICdpY29ucyc6IGZpbGVVUkxUb1BhdGgobmV3IFVSTChcIi4vbm9kZV9tb2R1bGVzL3Z1ZS1tYXRlcmlhbC1kZXNpZ24taWNvbnNcIiwgaW1wb3J0Lm1ldGEudXJsKSlcbiAgICAgICAgfSxcbiAgICAgICAgZXh0ZW5zaW9uczogW1xuICAgICAgICAgICAgXCIudnVlXCIsXG4gICAgICAgICAgICBcIi50c1wiXG4gICAgICAgIF1cbiAgICB9XG59KVxuIl0sCiAgIm1hcHBpbmdzIjogIjtBQUEyYixTQUFTLGVBQWUsV0FBVztBQUU5ZCxTQUFTLG9CQUFvQjtBQUM3QixPQUFPLFNBQVM7QUFDaEIsT0FBTyxpQkFBaUI7QUFKbVEsSUFBTSwyQ0FBMkM7QUFPNVUsSUFBTyxzQkFBUSxhQUFhO0FBQUEsRUFDeEIsU0FBUztBQUFBLElBQ0wsSUFBSTtBQUFBLElBQ0osWUFBWTtBQUFBLEVBQ2hCO0FBQUEsRUFDQSxRQUFRO0FBQUEsSUFDSixNQUFNO0FBQUEsSUFDTixPQUFPO0FBQUEsTUFDSCxZQUFZO0FBQUEsSUFDaEI7QUFBQSxFQUNKO0FBQUEsRUFDQSxTQUFTO0FBQUEsSUFDTCxPQUFPO0FBQUEsTUFDSCxLQUFLLGNBQWMsSUFBSSxJQUFJLFNBQVMsd0NBQWUsQ0FBQztBQUFBLE1BQ3BELFNBQVMsY0FBYyxJQUFJLElBQUksNENBQTRDLHdDQUFlLENBQUM7QUFBQSxJQUMvRjtBQUFBLElBQ0EsWUFBWTtBQUFBLE1BQ1I7QUFBQSxNQUNBO0FBQUEsSUFDSjtBQUFBLEVBQ0o7QUFDSixDQUFDOyIsCiAgIm5hbWVzIjogW10KfQo=

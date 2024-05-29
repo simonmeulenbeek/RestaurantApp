@@ -1,0 +1,70 @@
+header {
+    display: flex;
+    line-height: 1.5;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h2 {
+        font-size: 28pt;
+    }
+    
+    
+    .header_tafel_aanduiding {
+        position: absolute;
+        right: 0%;
+        top: 0px;
+        background-color: black;
+        width: 100px;
+        height: 100px;
+        color: white;
+        text-align: center;
+        font-size: 24px;
+
+        > .top {
+            margin: 0 auto;
+            margin-top: 8px;
+            width: 70%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            align-items: center;
+
+            > svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        &__tekst {
+            margin-bottom: 0px;
+            line-height: 1;
+            font-size: 22;
+            margin-top: 0;
+        }
+
+        &__nummer {
+            margin-top: 0px;
+            line-height: 1;
+            font-size: 28px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        display: flex;
+        place-items: center;
+        flex-direction: row;
+        padding-right: calc(var(--section-gap) / 2);
+
+        .header_tafel_aanduiding {
+            right: 20%;
+        }
+    
+        .wrapper {
+            display: flex;
+            place-items: flex-start;
+            flex-wrap: wrap;
+        }
+    }
+
+}

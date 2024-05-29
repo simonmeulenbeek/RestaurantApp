@@ -1,0 +1,26 @@
+// @import "./components/_partials.scss";
+
+// Variables and stuff
+@import './style.scss';
+@import './variables.scss';
+
+// Main
+
+@import './body.scss';
+@import './app.scss';
+@import './debug.scss';
+
+// Common
+
+@import './common/form.scss';
+
+// Partials
+@import './components/_header.scss';
+@import './components/_stappen_plan.scss';
+@import './components/_menu.scss';
+@import './components/_amount_widget.scss';
+@import './components/_label_value.scss';
+@import './components/_current_order.scss';
+@import './components/_modal.scss';
+@import './components/_keypad.scss';
+@import './components/_table_selector.scss';

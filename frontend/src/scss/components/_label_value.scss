@@ -1,0 +1,29 @@
+.label_value {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+
+    &__label {
+        font-size: x-small;
+        font-weight: bold;
+        font-family: sans-serif;
+    }
+
+    &__value {
+        font-size: larger;
+        margin-left: 12px;
+    }
+
+    
+    @media (min-width: 1024px) {    
+        &__label {
+            font-size: smaller;
+            font-weight: bold;
+            font-family: sans-serif;
+        }
+
+        &__value {
+            font-size: larger;
+        }
+    }
+}

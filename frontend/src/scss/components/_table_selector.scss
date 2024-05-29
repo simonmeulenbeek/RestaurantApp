@@ -1,0 +1,31 @@
+.table_selector {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__selectbox {
+        width: 300px;
+    }
+
+    &__option{
+        margin: 4px;
+        padding: 8px;
+    }
+
+    &__btn_choose {
+
+    }
+}
+
+.table_option {
+    display: flex;
+    flex-direction: column;
+
+    &__id {
+        font-size: smaller;
+    }
+
+    &__table_number {
+        font-size: larger;
+    }
+}
