@@ -1,50 +1,51 @@
 package xyz.simonmeulenbeek.visie.excersise.spring.restaurant.model;
 
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.junit.jupiter.api.Test;
-import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.DishRepository;
-
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.DishRepository;
 
 @SpringBootTest
-@EntityScan(basePackages = "xyz.simonmeulenbeek.visie.excersise.spring.restaurant.model")
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DishTest {
 
     @Autowired
-    private static DishRepository repository;
+    private DishRepository repository;
 
-    @BeforeClass
-    public static void setup() {
-        Dish dish1 = new Dish(1, "aardappels", 2.57);
-        Dish dish2 = new Dish(2, "patat", 4.57);
-        Dish dish3 = new Dish(3, "frikandel", 2.50);
-        Dish dish4 = new Dish(4, "kroket", 2.75);
+    @BeforeAll
+    void createTestData() {
+        Dish dish;
+        dish = new Dish(1, "aardappels", 2.57);
+        repository.save(dish);
 
-        repository.save(dish1);
-        repository.save(dish2);
-        repository.save(dish3);
-        repository.save(dish4);
+        dish = new Dish(2, "patat", 4.57);
+        repository.save(dish);
+
+        dish = new Dish(3, "frikandel", 2.50);
+        repository.save(dish);
+
+        dish = new Dish(4, "kroket", 2.75);
+        repository.save(dish);
     }
 
     @Test
     void canFetchItems() {
         List<Dish> list = repository.findAll();
-        assertEquals("Found more/less than ", 4, list.size());
+        Assertions.assertEquals(4, list.size(), "More items than added for tests");
     }
 
     @Test
     void idMustBeUnique() {
-        Dish testDish = new Dish(10, "friet", 4.50);
-        assertThrows(Exception.class,
-                () -> repository.save(testDish));
+        Dish dish_before = repository.findById(1).get();
+        Assumptions.assumeTrue("aardappels".equals(dish_before.name));
+
+        Dish testDish = new Dish(1, "friet", 4.50);
+        Assertions.assertThrows(Exception.class, () -> repository.save(testDish), "Should throw because ID already exists");
+
+        Dish dish_after = repository.findById(1).get();
+        Assertions.assertNotEquals(testDish, dish_after, "testItem shouldn't have been saved, but was returned from repository.");
     }
 
 }

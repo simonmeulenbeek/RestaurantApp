@@ -1,0 +1,16 @@
+app:
+  name: "RestaurantApp"
+  db:
+    name: restaurant
+spring:
+  application:
+    name: "visie.excersise.spring.restaurant"
+  datasource:
+    driver-class-name: "org.h2.Driver"
+    url: "jdbc:h2:mem:${app.db.name};DB_CLOSE_DELAY=-1"
+  flyway:
+    enabled: false
+hibernate:
+  dialect: "org.hibernate.dialect.H2Dialect"
+  hbm2ddl:
+    auto: "create"
