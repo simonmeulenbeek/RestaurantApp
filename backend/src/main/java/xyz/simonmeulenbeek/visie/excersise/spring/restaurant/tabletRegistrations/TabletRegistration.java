@@ -1,5 +1,6 @@
 package xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tabletRegistrations;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tables.TableData;
 import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tablets.Tablet;
@@ -28,6 +29,7 @@ public class TabletRegistration {
         this.table = tableData;
     }
 
+    @JsonManagedReference
     public Tablet getTablet() {
         return tablet;
     }
@@ -36,6 +38,7 @@ public class TabletRegistration {
         this.tablet = tablet;
     }
 
+    @JsonManagedReference
     public TableData getTableData() {
         return table;
     }

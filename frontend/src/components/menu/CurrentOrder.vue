@@ -4,16 +4,22 @@ import type { PropType, Ref } from 'vue'
 import { useMediaQuery, useStorage } from '@vueuse/core';
 
 import type { CurrentOrderItem } from '@/types/order_item'
+import { tabletStore } from '@/services/tablets/TabletStore';
 import CurrentOrderItemComponent from './CurrentOrderItemComponent.vue';
 
 export default defineComponent({
 	components: { CurrentOrderItemComponent },
-	props: {},
+	props: {
+		order: {
+			type: Function,
+			required: false
+		}
+	},
 	data() { return {
 		currentOrder: useStorage('current-order', new Map() as Map<string, CurrentOrderItem>, sessionStorage),
-		isMobile: useMediaQuery('(max-width: 1024px)')
+		isMobile: useMediaQuery('(max-width: 1024px)'),
+		tabletStore
 	} },
-	methods: {},
 	computed: {},
 	watch: {},
 	mounted() {
@@ -33,6 +39,7 @@ export default defineComponent({
 						<div class="current_order__table_header current_order__table_header__total">Subtotaal</div>
 					</div>
 					<CurrentOrderItemComponent v-for="[_, orderItem] in currentOrder" :key="orderItem.dishId" :item="orderItem" />
+					<button v-if="order" class="menu__order_button" @click="this.order">Order</button>
 				</div>
 			</div>
 		</div>

@@ -27,8 +27,7 @@ public class TabletRegistrationService {
     }
 
     public TabletRegistration getRegistrationForTablet(String tabletId) {
-        TabletRegistration result = tabletRegistrationRepository.findByTablet(UUID.fromString(tabletId));
-        return result;
+        return tabletRegistrationRepository.findByTablet(UUID.fromString(tabletId));
     }
 
     public List<TabletRegistration> getRegistrationsForTable(String tableId) {
@@ -42,6 +41,14 @@ public class TabletRegistrationService {
     public TabletRegistration registerTabletToTable(String tabletId, String tableId) {
         Tablet tablet = tabletService.getTablet(UUID.fromString(tabletId)).orElseThrow(() -> new NoSuchElementException("Tablet not found"));
         TableData table = tableDataService.getTableData(UUID.fromString(tableId)).orElseThrow(() -> new NoSuchElementException("Table not found"));
+
+        TabletRegistration current = this.getRegistrationForTablet(tabletId);
+        if (current != null) {
+            tablet.setTabletRegistration(null);
+            table.getRegisteredTablets().remove(tablet);
+            tabletRegistrationRepository.delete(current);
+            tabletRegistrationRepository.flush();
+        }
 
         TabletRegistration registration = new TabletRegistration(tablet, table);
         return tabletRegistrationRepository.save(registration);

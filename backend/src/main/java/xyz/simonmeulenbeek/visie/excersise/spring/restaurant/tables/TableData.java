@@ -1,5 +1,6 @@
 package xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tables;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -45,6 +46,15 @@ public class TableData {
     }
     public void setTableNumber(Integer tableNumber) {
         this.tableNumber = tableNumber;
+    }
+
+    @JsonBackReference
+    public List<TabletRegistration> getRegisteredTablets() {
+        return registeredTablets;
+    }
+
+    public void setRegisteredTablets(List<TabletRegistration> registeredTablets) {
+        this.registeredTablets = registeredTablets;
     }
 
     public LocalDateTime getCreatedAt() {

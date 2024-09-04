@@ -2,8 +2,6 @@ package xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tablets;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tabletRegistrations.TabletRegistrationDTO;
-import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tabletRegistrations.TabletRegistrationService;
 
 import java.util.List;
 import java.util.UUID;

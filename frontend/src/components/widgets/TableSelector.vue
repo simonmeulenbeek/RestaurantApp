@@ -1,50 +1,62 @@
 <script lang="ts">
     import { defineComponent } from 'vue'
-    import type { PropType } from 'vue'
-
-    import { useStorage } from '@vueuse/core'
-    import { v4 as uuidv4 } from 'uuid'
-
-    import { getAllTables, registerTabletToTable } from '@/services'
+    import type { AxiosResponse } from 'axios'
+    
     import type { TableData } from '@/types/table_data'
+    import { getAllTables, registerTabletToTable } from '@/services'
+    import { tabletStore } from '@/services/tablets/TabletStore'
+    
+    import { ModalControlMixin } from '../common/ModalCrontolMixin'
 
     export default defineComponent({
-        props: {},
-        data() { return {
-            tables: [] as TableData[],
-            selectedTable: null,
-            tabletId: useStorage('tablet_id', uuidv4(), localStorage),
-            registration: useStorage('tablet_registration', null, sessionStorage)
-        } },
-        methods: {
-            registerFunction: function () {
-                console.log("tabletId: ", this.tabletId);
-                console.log("selectedTable: ", this.selectedTable);
-                
-                registerTabletToTable(this.tabletId, this.selectedTable)
-            },
-            registerTabletToTable: function (tabletId: string, tableId: string) {
-                registerTabletToTable(tabletId, tableId).then((result) => this.registration = result);
+        mixins: [ModalControlMixin],
+        data() { 
+            return {
+                tables: [] as TableData[],
+                selectedTable: null,
+                tabletStore,
+                loading: true
             }
         },
-        computed: {},
-        watch: {},
+        methods: {
+            registerFunction: function () {
+                if (this.tabletStore.tabletId && this.selectedTable) {
+                    registerTabletToTable(this.tabletStore.tabletId, this.selectedTable)
+                        .then((response: AxiosResponse["data"]) => {
+                            console.log(response);
+                            this.tabletStore.registration = response;
+                            this.closeModal();
+                    });
+                }
+            }
+        },
         mounted() {
-            getAllTables().then((result) => this.tables = result);
+            if (this.tabletStore.tabletId) {
+                getAllTables().then((response: AxiosResponse["data"]) => {
+                    this.tables = response;
+                    this.loading = false;
+                }
+            );
+            };
         },
     })
 </script>
-<template>
+<template #modal-items="props">
     <div class="table_selector">
         <select class="table_selector__selectbox" name="table_selector" v-model="selectedTable" size="8">
-            <option class="table_selector__option table_option" v-for="table in tables" :key="table.id" :value="table.id">
-                <div class="table_option__id">
-                    {{ table.id }}
-                </div>
-                 <div class="table_option__table_number">
-                    {{ table.tableNumber ? table.tableNumber : "No tablenumber assigned" }}
-                 </div>
-            </option>
+            <template v-if="loading">
+                loading...
+            </template>
+            <template v-else>
+                <option class="table_selector__option table_option" v-for="table in tables" :key="table.id" :value="table.id">
+                    <div class="table_option__id">
+                        {{ table.id }}
+                    </div>
+                    <div class="table_option__table_number">
+                        {{ table.tableNumber ? table.tableNumber : "No tablenumber assigned" }}
+                    </div>
+                </option>
+            </template>
         </select>
         <button class="table_selector__btn_choose" @click="registerFunction">
             Assign table

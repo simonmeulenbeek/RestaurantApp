@@ -1,14 +1,14 @@
 package xyz.simonmeulenbeek.visie.excersise.spring.restaurant.orders;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.customerSessions.CustomerSession;
-import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.dishes.Dish;
+import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.orderItems.OrderItem;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -17,14 +17,15 @@ import java.util.UUID;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(name = "id", columnDefinition = "CHAR(36)", insertable = false, updatable = false, nullable = false)
     UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "session_id")
-    CustomerSession sessionId;
+    @JsonBackReference
+    CustomerSession session;
 
     @OneToMany(mappedBy = "order")
     List<OrderItem> orderedItems;
@@ -37,11 +38,15 @@ public class Order {
 
     public Order() {}
 
+    public Order(CustomerSession session) {
+        this.session = session;
+    }
+
     public UUID getId() {
         return this.id;
     }
 
-    public CustomerSession getSessionId() { return this.sessionId; }
+    public CustomerSession getSession() { return this.session; }
 
     public LocalDateTime getCreatedAt() {
         return this.createdAt;

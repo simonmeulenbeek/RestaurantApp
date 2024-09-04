@@ -11,4 +11,21 @@
         justify-content: space-between;
         gap: 16px;
     }
+
+    .label {
+        font-size: smaller;
+        color: $color-5;
+    }
+    
+    .value {
+        border: solid 1px lightgrey;
+        padding: 8px;
+        font-family: monospace;
+        min-width: 256px;
+        max-width: 256px;
+    }
+    
+    .action {
+        
+    }    
 }

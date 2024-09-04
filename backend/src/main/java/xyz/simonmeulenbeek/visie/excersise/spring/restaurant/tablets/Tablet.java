@@ -1,5 +1,6 @@
 package xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tablets;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -31,6 +32,16 @@ public class Tablet {
     public UUID getId() {
         return id;
     }
+
+    @JsonBackReference
+    public TabletRegistration getTabletRegistration() {
+        return tabletRegistration;
+    }
+
+    public void setTabletRegistration(TabletRegistration tabletRegistration) {
+        this.tabletRegistration = tabletRegistration;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }

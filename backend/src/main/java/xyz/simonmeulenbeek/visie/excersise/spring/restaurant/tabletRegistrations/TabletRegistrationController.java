@@ -2,6 +2,7 @@ package xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tabletRegistration
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.common.TabletAndTableDTO;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class TabletRegistrationController {
     }
 
     @PostMapping("/new")
-    public TabletRegistration registerToTable(@RequestBody TabletRegistrationDTO request) {
+    public TabletRegistration registerToTable(@RequestBody TabletAndTableDTO request) {
         return tabletRegistrationService.registerTabletToTable(request.getTabletId(), request.getTableId());
     }
 }

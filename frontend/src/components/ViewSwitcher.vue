@@ -2,6 +2,10 @@
 export default {
 	expose: ['toggleView'],
 	props: {
+		reactiveBoolean: {
+			type: Boolean,
+			required: false
+		},
 		switch: {
 			type: Boolean,
 			required: false,
@@ -29,7 +33,13 @@ export default {
 </script>
 <template>
 	<div class="view_switcher">
-		<slot name="default" v-if="showDefault" />
-		<slot name="alternative" v-if="showAlternative" />
+		<template v-if="reactiveBoolean !== null">
+			<slot name="default" v-if="reactiveBoolean === false" />
+			<slot name="alternative" v-if="reactiveBoolean === true" />
+		</template>
+		<template v-else>
+			<slot name="default" v-if="showDefault" />
+			<slot name="alternative" v-if="showAlternative" />
+		</template>
 	</div>
 </template>

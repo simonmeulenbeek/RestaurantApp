@@ -11,25 +11,21 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-    public final OrderRepository repository;
+    OrderService service;
 
     @Autowired
-    public OrderController(OrderRepository repository) {
-        this.repository = repository;
+    public OrderController(OrderService orderService) {
+        this.service = orderService;
     }
 
     @GetMapping
-    public List<Order> getAllOrders() {return repository.findAll();}
+    public List<Order> getAllOrders() { return service.getAllOrders(); }
 
     @GetMapping("/orders/{id}")
-    public Optional<Order> getSpecificOrder(UUID id) {return repository.findById(id); }
+    public Order getSpecificOrder(UUID id) { return service.getOrderById(id); }
 
-    @PostMapping
-    public Order createOrder(@RequestBody Order newOrder) {
-        return repository.save(newOrder);
+    @PostMapping("/new")
+    public Order createOrder(@RequestBody NewOrderDTO newOrder) {
+        return service.createNewOrder(newOrder);
     }
-
-    @PostMapping("/create")
-    public Order createNewOrder() {return repository.save(new Order());}
-
 }

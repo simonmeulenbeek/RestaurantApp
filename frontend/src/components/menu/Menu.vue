@@ -4,26 +4,26 @@ import axiosInstance from '@/services/axios/axios'
 
 import { useStorage } from '@vueuse/core'
 
+import { tabletStore } from '@/services/tablets/TabletStore';
 import type { Dish } from '@/types/dish'
 import type { CurrentOrderItem } from '@/types/order_item'
+import { createNewOrder } from '@/services/orders/OrderService'
 
 export default defineComponent({
+	expose: ['orderItems'],
 	data() {
 		return {
 			dishes: [] as Dish[],
 			currentOrder: useStorage('current-order', new Map() as Map<string, CurrentOrderItem>, sessionStorage),
+			tabletStore
 		}
 	},
 	methods: {
-		orderItems: function () {
-			let dishItem = this.dishes[(Math.floor(Math.random() * this.dishes.length))];
-			console.log(dishItem);
-			
-			axiosInstance.post('/orders', {
-				dishId: dishItem.id,
-				amount: 3,
-				pricePerUnit: dishItem.price
-			})
+		orderItems: function () {			
+			if (tabletStore.session) {
+				createNewOrder(tabletStore.session?.id.toString(), Array.from(this.currentOrder.values()))
+
+			}
 		},
 		onMenuItemChange: function(dish: Dish, amount: number) {
 			if (amount <= 0) {
@@ -65,8 +65,7 @@ export default defineComponent({
 			</ol>
 		</div>
 		<div class="menu__right-side">
-			<CurrentOrder/>
-			<button class="menu__order_button" @click="orderItems">Order</button>
+			<CurrentOrder :order="orderItems"/>
 		</div>
 	</div>
 </template>

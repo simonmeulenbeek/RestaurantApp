@@ -1,6 +1,6 @@
-package xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tabletRegistrations;
+package xyz.simonmeulenbeek.visie.excersise.spring.restaurant.common;
 
-public class TabletRegistrationDTO {
+public class TabletAndTableDTO {
     private String tabletId;
     private String tableId;
 

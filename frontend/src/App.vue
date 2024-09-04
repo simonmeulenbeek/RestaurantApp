@@ -4,33 +4,28 @@ import { useStorage } from '@vueuse/core'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import axiosInstance from './services/axios/axios'
+import { initialize } from './services/tablets/TabletService';
+import { tabletStore } from './services/tablets/TabletStore';
 
 export default defineComponent({
 	data() {
 		return {
 			viewSwitcherReference: null as HTMLElement | null,
             tabletId: useStorage('tablet_id', uuidv4(), localStorage),
-			registration: useStorage('tablet_registration', null, sessionStorage)
+            tabletStore
 		}
 	},
 	mounted() {
-		this.viewSwitcherReference = this.$refs.viewSwitcher as HTMLElement
-		axiosInstance
-			.get(`/tablet_registrations/tablet/${this.tabletId}`)
-			.then((response) => {
-				console.log(response.data)
-				this.registration = response.data 
-			})
-			.finally(() => {console.log("bla!")})
+		this.viewSwitcherReference = this.$refs.viewSwitcher as HTMLElement;
+        initialize(this.tabletId);
 	},
 })
 </script>
 <template>
 	<main id="app">
-		<Header :tableNumber="registration?.tableData?.tableNumber" v-if="viewSwitcherReference" :viewSwitcherReference="viewSwitcherReference" :switch="true" />
+		<Header :tableNumber="tabletStore.registration?.tableData?.tableNumber"/>
 		<div class="app__content">
-			<ViewSwitcher ref="viewSwitcher">
+			<ViewSwitcher :reactiveBoolean="!!(tabletStore.session)">
 				<template #default>
 					<StappenPlan />
 				</template>
@@ -46,7 +41,7 @@ export default defineComponent({
             </div>
             <div class="debug__content-item">
                 <div class="label">Registration</div>
-                <div class="value">{{ registration }}</div>
+                <div class="value">{{ tabletStore.registration }}</div>
             </div>
         </DebugPanel>
 	</main>

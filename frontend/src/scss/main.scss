@@ -8,11 +8,12 @@
 
 @import './body.scss';
 @import './app.scss';
-@import './debug.scss';
 
 // Common
-
 @import './common/form.scss';
+
+// Debug
+@import './debug/debug.scss';
 
 // Partials
 @import './components/_header.scss';

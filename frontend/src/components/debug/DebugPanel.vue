@@ -2,9 +2,15 @@
 import { defineComponent } from 'vue'
 
 import Modal from '../common/Modal.vue'
+import {tabletStore} from '@/services/tablets/TabletStore'
 
 export default defineComponent({
-	components: { Modal }
+	components: { Modal },
+    data() {
+        return {
+            tabletStore
+        }
+    }
 })
 </script>
 <template>
