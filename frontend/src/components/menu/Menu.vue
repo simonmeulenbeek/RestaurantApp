@@ -8,6 +8,7 @@ import { tabletStore } from '@/services/tablets/TabletStore';
 import type { Dish } from '@/types/dish'
 import type { CurrentOrderItem } from '@/types/order_item'
 import { createNewOrder } from '@/services/orders/OrderService'
+import RunningOrdersWidget from './RunningOrdersWidget.vue';
 
 export default defineComponent({
 	expose: ['orderItems'],
@@ -15,6 +16,7 @@ export default defineComponent({
 		return {
 			dishes: [] as Dish[],
 			currentOrder: useStorage('current-order', new Map() as Map<string, CurrentOrderItem>, sessionStorage),
+			runningOrders: useStorage('running-orders', new Map() as Map<string, any>, sessionStorage),
 			tabletStore
 		}
 	},
@@ -22,7 +24,6 @@ export default defineComponent({
 		orderItems: function () {			
 			if (tabletStore.session) {
 				createNewOrder(tabletStore.session?.id.toString(), Array.from(this.currentOrder.values()))
-
 			}
 		},
 		onMenuItemChange: function(dish: Dish, amount: number) {
@@ -42,11 +43,18 @@ export default defineComponent({
 					})
 				}
 			}
+		},
+		onOrderClear: function() {
+			console.log(this.$refs);
+			this.$refs.menuItems.forEach(element => {
+				(element as MenuItem).resetMenuItem();		
+			});
 		}
 	},
 	computed: {},
 	watch: {},
 	mounted() {
+		this.currentOrder = new Map();
 		axiosInstance.get('/dishes').then((response) => {
 			this.dishes = response.data
 		})
@@ -55,17 +63,15 @@ export default defineComponent({
 </script>
 <template>
 	<div class="menu">
-		<div class="menu__left-side"></div>
+		<div class="menu__left-side">
+			<RunningOrdersWidget v-show="this.runningOrders.size >= 1" />
+		</div>
 		<div class="menu__center">
 			<h3 class="menu__title">Menu</h3>
-			<ol>
-				<li v-for="dish in dishes" :key="dish.id">
-					<MenuItem class="menu__menu-item" :dish="dish" @orderChange="onMenuItemChange" />
-				</li>
-			</ol>
+            <MenuItem class="menu__menu-item" :dish="dish" @orderChange="onMenuItemChange" v-for="dish in dishes" :key="dish.id" ref="menuItems"/>
 		</div>
 		<div class="menu__right-side">
-			<CurrentOrder :order="orderItems"/>
+			<CurrentOrder :order="orderItems" @orderClear="onOrderClear"/>
 		</div>
 	</div>
 </template>

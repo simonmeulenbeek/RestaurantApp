@@ -30,7 +30,6 @@ public class Order {
     @OneToMany(mappedBy = "order")
     List<OrderItem> orderedItems;
 
-
     @CreationTimestamp
     LocalDateTime createdAt;
     @UpdateTimestamp

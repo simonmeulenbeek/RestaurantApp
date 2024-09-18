@@ -16,7 +16,6 @@ export const GetSessionForTable = async (tableId: string) => {
     return axiosInstance
         .get(`/sessions/table/${tableId}`)
         .then((response: AxiosResponse) => {
-            console.log(response);
             return response.data
         })
 }

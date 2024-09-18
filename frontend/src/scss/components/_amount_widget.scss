@@ -1,27 +1,30 @@
 .amount_widget {
-    display: flex;
-    flex-direction: row;
-    column-gap: 12px;
-    align-items: center;
-    font-size: xx-large;
+    font-size: x-large;
+
+    &__flex-container {            
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        column-gap: 12px;
+        align-items: center;
+    }
 
     &__amount {
-        width: 42px;
+        width: 36px;
         background-color: white;
         text-align: right;
     }
 
-    &__button_minus {
+    &__button {
         background-color: $color-5;
-        border-radius: 50%;
+        border-radius: 25%;
         width: 28px;
         height: 28px;
     }
 
+    &__button_minus {
+    }
+
     &__button_plus {
-        background-color: $color-5;
-        border-radius: 50%;
-        width: 28px;
-        height: 28px;
     }
 }

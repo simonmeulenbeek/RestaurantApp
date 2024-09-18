@@ -1,6 +1,5 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { PropType } from 'vue'
 
 import { TaAdjustments } from '@kalimahapps/vue-icons'
 import ToggleSwitch from 'icons/ToggleSwitch.vue'
@@ -59,16 +58,11 @@ export default defineComponent({
                 <div class="form__item form__item--single-line">
                     <div class="label">Tablet Registration</div>
                     <div class="value">{{ this.tabletStore.tablet ? '✅' : '❌' }}</div>
-                    <div class="action">
-                        <button @click="registerTablet()">Register tablet</button>
-                    </div>
+                    <button class="action" @click="registerTablet()">Register</button>
                 </div>
                 <div class="form__item form__item--single-line">
                     <div class="label">Table Registration</div>
                     <div class="value">{{ this.tabletStore.registration ? '✅' : '❌' }}</div>
-                </div>
-                <div class="form__item form__item--single-line">
-                    <div class="label">Assign table number</div>
                     <button class="action" @click="$refs.tableSelector?.toggleModal()">assign</button>
                     <Modal ref="tableSelector">
 						<TableSelector/>
@@ -76,6 +70,7 @@ export default defineComponent({
                 </div>
                 <div class="form__item form__item--single-line">
                     <div class="label">{{ this.tabletStore.enabled ? "Disable" : "Enable" }} Tablet</div>
+                    <div class="value">{{ this.tabletStore.session ? '✅' : '❌'  }}</div>
                     <button class="action" @click="toggleTablet()">{{ this.tabletStore.enabled ? "Disable" : "Enable" }}</button>
                 </div>
             </div>

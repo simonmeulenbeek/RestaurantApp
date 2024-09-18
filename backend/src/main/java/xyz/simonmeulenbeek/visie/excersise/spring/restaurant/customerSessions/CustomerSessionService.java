@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tables.TableData;
 import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tables.TableDataService;
-import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tabletRegistrations.TabletRegistration;
 import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tablets.TabletService;
 import xyz.simonmeulenbeek.visie.excersise.spring.restaurant.tablets.Tablet;
 
@@ -32,7 +31,7 @@ public class CustomerSessionService {
         return repository.findById(sessionId).orElse(null);
     }
 
-    public CustomerSession createNewSession(UUID tableId, UUID tabletId) {
+    public CustomerSession createNewOrFetchExistingSession(UUID tableId, UUID tabletId) {
         TableData table = tableService.getTableData(tableId).get();
         Tablet tablet = tabletService.getTablet(tabletId).get();
 

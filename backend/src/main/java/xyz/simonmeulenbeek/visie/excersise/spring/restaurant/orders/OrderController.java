@@ -21,8 +21,14 @@ public class OrderController {
     @GetMapping
     public List<Order> getAllOrders() { return service.getAllOrders(); }
 
-    @GetMapping("/orders/{id}")
-    public Order getSpecificOrder(UUID id) { return service.getOrderById(id); }
+    @GetMapping("/active")
+    public List<Order> getAllActiveOrders() { return service.getAllOrders(); }
+
+    @GetMapping("/{id}")
+    public Order getSpecificOrder(@PathVariable UUID id) { return service.getOrderById(id); }
+
+    @GetMapping("/session/{id}")
+    public List<Order> getAllOrdersForSession(@PathVariable UUID id) { return service.getOrdersForCustomerSession(id); }
 
     @PostMapping("/new")
     public Order createOrder(@RequestBody NewOrderDTO newOrder) {

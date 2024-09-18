@@ -22,7 +22,7 @@ public class OrderItemService {
         System.out.println(order);
         System.out.println(dish);
         System.out.println(orderItemDTO);
-        OrderItem item = new OrderItem(order, dish, orderItemDTO.amount, orderItemDTO.ppu);
+        OrderItem item = new OrderItem(order, dish, orderItemDTO.amount, orderItemDTO.pricePerUnit);
         return repository.save(item);
     }
 

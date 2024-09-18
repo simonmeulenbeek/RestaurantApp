@@ -3,51 +3,74 @@
 .menu {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 16px;
+    justify-content: space-evenly;
+
+    gap: 32px;
 
     &__left-side {
-        flex-basis: 20%;
+        flex-basis: 0%;
     }
     
     &__center {
-        flex-basis: 60%;
-        ol {
-            list-style: none;
-            padding-inline-start: 0;
-        }
+        flex-basis: 100%;
     }
     
     &__right-side {
-        flex-basis: 20%;
-        padding-top: 58px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
+        flex-basis: 0%;
     }
 
     &__menu-item {
         margin-top: 16px;        
     }
+
+    
+    @media (min-width: 1024px) {
+        &__left-side {
+            flex-basis: 20%;
+        }
+        
+        &__center {
+            flex-basis: 45%;
+        }
+        
+        &__right-side {
+            flex-basis: 20%;
+            padding-top: 58px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+    }
 }
 
 .menu-item {
     @extend .content-box;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 60% 40%;
     justify-content: space-between;
 
+    &__item_name {
+        padding: 8px;
+    }
+
+    &__item_price {
+        padding: 8px;
+    }
+
+    &__amount {
+        padding: 8px;
+    }
+
     > .menu-item__amount {
-        visibility: hidden;
+        display: none;
     }
 
     &--selected {
-        background-color: darken($color-1, 10%);
-        padding-right: 4px;
-
+        @extend .content-box--selected;
+        grid-template-columns: 60% 20% 20%;
 
         > .menu-item__amount {
-            visibility: visible;
+            display: revert;
         }
     }
 

@@ -6,10 +6,11 @@
 
 .form__item {
     &--single-line {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 16px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 8px;
+        justify-items: stretch;
+        align-items: center;
     }
 
     .label {
@@ -19,13 +20,13 @@
     
     .value {
         border: solid 1px lightgrey;
-        padding: 8px;
-        font-family: monospace;
-        min-width: 256px;
-        max-width: 256px;
+        padding: 4px;
+        max-width: 128px;
+        text-align: center;
+        justify-self: end;
     }
     
     .action {
-        
+        height: 100%;
     }    
 }

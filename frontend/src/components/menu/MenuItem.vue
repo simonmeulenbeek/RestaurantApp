@@ -10,6 +10,7 @@ import { createCurrentOrderItem } from '@/types/order_item';
 
 export default defineComponent({
 	emits: ['orderChange'],
+	expose: ['resetMenuItem'],
 	props: {
 		dish: {
 			type: Object as PropType<Dish>,
@@ -42,6 +43,11 @@ export default defineComponent({
 				let current = this.currentOrder.get(this.dish.id)
 				this.currentOrder.set(this.dish.id, { ...current, amount: newAmount } as CurrentOrderItem)
 			}
+		},
+		resetMenuItem: function() {
+			this.selected = false;
+			this.selectedAmount = 0;
+			this.$refs.amountWidget.reset();
 		}
 	}
 })
@@ -50,6 +56,6 @@ export default defineComponent({
 	<div class="menu-item" :class="{ 'menu-item--selected': selected }" @click="onClick">
 		<LabelValue class="menu-item__item_name" label="Gerecht" :value="dish.name" />
 		<LabelValue class="menu-item__item_price" label="Prijs" :value="dish.price.toFixed(2)" />
-		<AmountWidget class="menu-item__amount" @change="onAmountChange" />
+		<AmountWidget class="menu-item__amount" @change="onAmountChange" ref="amountWidget" />
 	</div>
 </template>

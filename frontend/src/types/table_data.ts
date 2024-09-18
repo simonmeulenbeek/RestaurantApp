@@ -1,6 +1,6 @@
 export type TableData = {
     id: string,
-    tableNumber: number,
+    tableNumber: number | null,
     createdAt: Date,
     updatedAt: Date
 }

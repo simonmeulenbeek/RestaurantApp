@@ -91,7 +91,7 @@ export default defineComponent({
 		<div class="modal" v-if="isOpened">
 			<div class="modal__content">
 				<slot></slot>
-				<button v-if="showCloseButton" @click="toggle">Close</button>
+				<button class="modal__btn-close" v-if="showCloseButton" @click="toggle">Close</button>
 			</div>
 		</div>
 	</Teleport>

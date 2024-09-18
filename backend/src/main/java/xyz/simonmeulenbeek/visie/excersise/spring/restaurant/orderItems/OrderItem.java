@@ -1,5 +1,6 @@
 package xyz.simonmeulenbeek.visie.excersise.spring.restaurant.orderItems;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -13,12 +14,20 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "order_items")
+@IdClass(OrderItemPrimaryKey.class)
 public class OrderItem {
+
     @Id
-    @GeneratedValue
-    @JdbcTypeCode(SqlTypes.CHAR)
-    @Column(name = "id", columnDefinition = "CHAR(36)", insertable = false, updatable = false, nullable = false)
-    UUID id;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "order_id", nullable = false)
+    Order order;
+
+    @Id
+    @OneToOne(optional = false)
+    @JoinColumn(name = "dish_id", nullable = false)
+    Dish dish;
+
+    public OrderItem() {}
 
     public OrderItem(Order order, Dish dish, int amount, double pricePerUnit) {
         this.order = order;
@@ -27,13 +36,18 @@ public class OrderItem {
         this.pricePerUnit = pricePerUnit;
     }
 
-    @ManyToOne(optional = false)
-    Order order;
-    @OneToOne(optional = false)
-    Dish dish;
-
     int amount;
     double pricePerUnit;
+
+    @JsonManagedReference
+    public Order getOrder() {
+        return order;
+    }
+
+    @JsonManagedReference
+    public Dish getDish() {
+        return dish;
+    }
 
     @CreationTimestamp
     LocalDateTime createdAt;

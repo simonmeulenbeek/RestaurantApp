@@ -3,13 +3,33 @@
 $color-1: #FFFCF2;
 $color-2: #CCC5B9;
 $color-3: #403D39;
+$color-3-light: rgba($color-3, 0.4);
 $color-4: #252422;
 $color-5: #EB5E28;
 
 .content-box {
-    padding: 0px 24px 0px 24px;
+    padding: 0px 12px 0px 12px;
     background-color: $color-1;
-    border: 1px solid rgba($color-3, 0.4);
+    border: 1px solid $color-3-light;
     border-radius: 16px;
     box-shadow: 1px 1px 8px 0px rgba($color-3, 0.4);
+
+    
+    @media (min-width: 768px) {
+        padding: 0px 24px 0px 24px;
+    }
+}
+
+.content-box--selected {
+    @extend .content-box;
+    background-color: darken($color-1, 10%);
+    border: 1px solid rgba($color-5, 0.3);
+}
+
+.drop-shadow-mild {
+    box-shadow: 0px 8px 16px 8px rgba(black, 0.2);
+}
+
+.drop-shadow-mild-up {
+    box-shadow: 0px -5px 16px 8px rgba(black, 0.2);
 }

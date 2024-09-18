@@ -5,7 +5,6 @@ export const getAllTables = () => {
     return axiosInstance
         .get("/tables")
         .then((result) => {
-            console.log(result)
             return result.data;
         })
         .catch((err) => {

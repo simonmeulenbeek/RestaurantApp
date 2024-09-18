@@ -48,10 +48,10 @@ public class OrderService {
 
         request.orderItems.forEach(orderItemDTO -> {
             Dish dishItem = dishService.getDishById(UUID.fromString(orderItemDTO.dishId));
+            System.out.println("dish: " + dishItem.toString());
             orderItemService.createForOrderDTO(newOrder, dishItem, orderItemDTO);
         });
-
-        newOrder.orderedItems.size();
+        
         return newOrder;
     }
 }

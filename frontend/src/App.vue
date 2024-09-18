@@ -35,14 +35,11 @@ export default defineComponent({
 			</ViewSwitcher>
 		</div>
 		<DebugPanel>
-            <div class="debug__content-item">
-                <div class="label">TabletID</div>
-                <div class="value">{{ tabletId }}</div>
-            </div>
-            <div class="debug__content-item">
-                <div class="label">Registration</div>
-                <div class="value">{{ tabletStore.registration }}</div>
-            </div>
+            <DebugContentItem label="Tablet ID" :value="tabletId" />
+            <DebugContentItem label="Table  ID" :value="tabletStore.table?.id" />                       
+            <DebugContentItem label="Registration" :value="tabletStore.registration" />
+            <DebugContentItem label="Session ID" :value="tabletStore.session?.id" />
         </DebugPanel>
+		<SocketMessager />
 	</main>
 </template>

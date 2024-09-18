@@ -1,12 +1,13 @@
 import type { UUID } from "crypto"
-import type { CurrentOrderItem } from "./order_item"
+import type { CurrentOrderItem, OrderItem } from "./order_item"
+import type { CustomerSession } from "./customer_session"
 
 export type Order = {
     id: UUID,
-    // TODO: orderId: number,
-    dishId: UUID,
-    amount: number,
-    pricePerUnit: number
+    session: CustomerSession,
+    orderItems: OrderItem[],
+    createdAt: Date,
+    updatedAt: Date
 }
 
 export type NewOrderDTO = {

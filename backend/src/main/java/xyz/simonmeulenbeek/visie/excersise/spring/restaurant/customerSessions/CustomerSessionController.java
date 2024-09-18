@@ -21,8 +21,8 @@ public class CustomerSessionController {
     public List<CustomerSession> getAllSessions() { return service.getAllSessions(); }
 
     @PostMapping("/new")
-    public CustomerSession createNewSession(@RequestBody TabletAndTableDTO request) {
-        return service.createNewSession(UUID.fromString(request.getTableId()), UUID.fromString(request.getTabletId()));
+    public CustomerSession createNewOrFetchExistingSession(@RequestBody TabletAndTableDTO request) {
+        return service.createNewOrFetchExistingSession(UUID.fromString(request.getTableId()), UUID.fromString(request.getTabletId()));
     }
 
     @GetMapping("/table/{tableId}")

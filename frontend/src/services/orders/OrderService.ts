@@ -1,10 +1,10 @@
 import axiosInstance from '@/services/axios/axios'
 import type { AxiosResponse } from 'axios'
-import type { NewOrderItemDTO } from '@/types/order'
+import type { NewOrderItemDTO, Order } from '@/types/order'
 import { NewOrderItemDTOFromCurrentOrderItem } from '@/types/order'
 import type { CurrentOrderItem } from '@/types/order_item';
 
-export const createNewOrder = async (customerSessionId: string, orderItems: CurrentOrderItem[]) => {
+export const createNewOrder = async (customerSessionId: string, orderItems: CurrentOrderItem[]): Promise<Order> => {
     let orderItemDTOs: NewOrderItemDTO[] = [];
     orderItems.forEach((element) => {
         orderItemDTOs.push(NewOrderItemDTOFromCurrentOrderItem(element))
@@ -20,11 +20,10 @@ export const createNewOrder = async (customerSessionId: string, orderItems: Curr
         })
 };
 
-export const GetSessionForTable = async (tableId: string) => {
-    return axiosInstance
-        .get(`/sessions/table/${tableId}`)
-        .then((response: AxiosResponse) => {
-            console.log(response);
-            return response.data
-        })
+export const GetCurrentOrdersForSession = async (sessionId: string): Promise<Order[]> => {
+	return axiosInstance
+		.get(`/orders/session/${sessionId}`)
+		.then((response: AxiosResponse) => {
+			return response.data
+		})
 }
